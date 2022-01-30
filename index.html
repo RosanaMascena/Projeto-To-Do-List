@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lista de Tarefas</title>
+
+	<style type="text/css">
+		body {
+			background-image: url(5615991.jpg);
+		}
+
+		.content{
+			max-width: 400px;
+			max-height: 600px;
+			margin: auto;
+			margin-top: 100px;
+			background: linear-gradient(#FEFEFE, #7FFFD4);
+			height: 450px;
+			padding: 2%;
+			border: none;
+			border-radius: 10px;
+		}
+
+		.content h1 {
+			text-align: center;
+			color: #FF69B4;
+		}
+
+		input[type=text] {
+			width: 80%;
+			height: 30px;
+			margin-bottom: 10px;
+			border: none;
+		}
+
+		input[type=text]:focus {
+			box-shadow: 0 0 0 0;
+			outline: 0;
+		}
+
+		input[type=button]{
+			border: none;
+			width: 17%;
+			float: right;
+			height: 32px;
+		}
+
+		button {
+			float: right;
+			width: 25px;
+			padding: 5px;
+			border-radius: 4px;
+		}
+
+		button:hover, input[type=button]:hover{
+			background: #FFF0F5;
+			color: #FF69B4;
+			border: none;
+		}
+
+		button, input[type=button]{
+			cursor: pointer;
+			background: #7FFFD4;
+			color: #008080;
+			border: none;
+		}
+
+		ul {
+			list-style-type: none;
+			margin-top: 30px;
+			padding: 10px;
+			height: 280px;
+			background: #FFFFFF;
+			overflow-y: auto;
+			border-radius: 10px;
+		}
+
+		li {
+			height: 30px;
+			margin: 10px 0 10px 0;
+		}
+
+	@media only screen and (max-width:768px){
+		
+		body {
+			padding: 15px;
+		}
+		
+		ul {	
+			margin-top: 0px;
+			height: 250px;
+			margin: 10px;
+		}
+
+		input[type="button"] {
+			font-size: 10px;
+			margin-right: 10px;
+		}
+
+		input[type=text] {
+    		width: 70%;
+			margin-left: 15px;
+		}
+	}
+
+	</style>
+
+	<meta name="viewport" content="width=device-width initial-scale=1.0"/>
+
+</head>
+<body>
+	
+	<div class="content">
+
+		<div class="row">
+			<div class="col-12">
+				<h1>Minha Lista de Tarefas</h1>
+				<fomr>
+					<input type="text" name="task" id='task' placeholder="Nova Tarefa...">
+					<input type="button" name="" value='Adicionar' onclick="addTask();">
+				</fomr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="to-do-list-box">
+					<ul id="myList">
+					</uk>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+<script type="text/javascript">
+	
+	var ul = document.getElementById("myList");
+	var li;
+	var itemId;
+	var item;
+
+	addTask = function (){
+		if(document.getElementById("task").value != "")
+			
+			item = document.getElementById("task");
+			
+			itemId = ul.childElementCount;
+			
+			li = createItemEl(item.value, itemId);
+			li.appendChild(createRemoveTaskBtn(itemId));
+	}
+
+	removeTask = function (itemId){
+		for( i = 0; i < ul.children.length ; i++){
+			if(ul.children[i].getAttribute("index") == itemId){
+				ul.children[i].remove();
+			}
+		}
+	}
+
+	createItemEl = function (itemValue, itemId){
+		
+		let li = document.createElement("li");
+		
+		li.setAttribute("index", itemId);
+		
+		li.appendChild(document.createTextNode(itemValue));
+		ul.appendChild(li);
+		
+		return li;
+	}
+
+	createRemoveTaskBtn = function (itemId){
+		
+		let btn = document.createElement("button");
+		
+		btn.setAttribute("onclick", "removeTask("+itemId+")");
+		
+		btn.innerHTML = "X";
+		
+		return btn;
+	}
+</script>
+	
+</body>
+</html>
